@@ -1,0 +1,25 @@
+# ignore build and tests related files
+.dist
+node_modules
+build
+yarn-error.log
+
+# Deploy related files
+invalidation.json
+
+# Cypress related files that should be ignored
+cypress/screenshots
+cypress/videos
+cypress/fixtures/example.json
+
+# Gradle files
+.gradle
+gradle
+gradlew
+gradlew.bat
+
+# IntelliJ Idea files
+.idea
+
+# MacOS files and directories
+.DS_Store
