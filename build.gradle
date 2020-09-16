@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+task yarnInstall(type: Exec) {
+  inputs.file("yarn.lock")
+  outputs.dir("node_modules")
+  commandLine "yarn", "install"
+}
+
+task typeCheck(type: Exec) {
+  commandLine "yarn", "run", "flow"
+}
+
+task lint(type: Exec) {
+  commandLine "yarn", "run", "lint"
+}
+
+task compile(type: Exec) {
+  inputs.file("webpack.config.js")
+  inputs.file(".babelrc")
+  inputs.dir("src")
+
+  outputs.dir("dist")
+
+  commandLine "yarn", "run", "build"
+}
+
+compile.dependsOn yarnInstall
+lint.dependsOn yarnInstall
+test.dependsOn lint
+test.dependsOn typeCheck
+build.dependsOn compile
