@@ -1,0 +1,26 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base",
+    "plugin:flowtype/recommended",
+  ],
+  "plugins": [
+    "flowtype",
+  ],
+  "env": {
+    "browser": true,
+  },
+  "globals": {
+    "BUILD_NUMBER": true,
+    "__webpack_hash__": true,
+  },
+  "rules": {
+    "no-confusing-arrow": 0,
+    "spaced-comment": 0,
+    "no-param-reassign": 0,
+    "no-underscore-dangle": 0,
+    "class-methods-use-this": 0,
+    "flowtype/define-flow-type": 1,
+    "flowtype/use-flow-type": 1
+  },
+}
