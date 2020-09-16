@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/webpack-cli/\.nyc_output/.*
+.*node_modules/editions/es2015/index.js
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
