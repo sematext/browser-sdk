@@ -1,0 +1,110 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <title>Bootstrap 3 Template</title>
+    
+    <script type="text/javascript">
+      const sematextExperienceToken = '8763d12d-1j3t-932v-b498-544290z98k43';
+      const sematextExperienceReceiverURL = 'https://rum-receiver.sematext.com';
+    </script>
+
+    <script type="text/javascript">
+      (function(e,r,n,t,s){var a=[];e[s]=function(){a.push(arguments)};e[s].queue=a;var o=[];var i=[];var c=true;
+        var p=void 0;if(window.PerformanceObserver&&window.PerformanceObserver.supportedEntryTypes&&
+          (PerformanceObserver.supportedEntryTypes.indexOf("longtask")>=0||
+            PerformanceObserver.supportedEntryTypes.indexOf("element")>=0)){
+          p=new PerformanceObserver(function(e){e.getEntries().forEach(function(e){
+            switch(e.entryType){case"element":i.push(e);break;case"longtask":o.push(e);break;default:break}})});
+          p.observe({entryTypes:["longtask","element"]})}e[s+"lt"]={
+          longTasks:o,timingElements:i,inPageLoad:c,observer:p};if(t){var u=r.createElement(n);u.async=1;
+          u.src=t;var f=r.getElementsByTagName(n)[0];f.parentNode.insertBefore(u,f)}})
+      (window,document,"script","/rum.js","strumTest");
+    </script>
+    <script type="text/javascript">
+      (function(e,r,n,t,s){var a=[];e[s]=function(){a.push(arguments)};e[s].queue=a;var o=[];var i=[];var c=true;
+        var p=void 0;if(window.PerformanceObserver&&window.PerformanceObserver.supportedEntryTypes&&
+          (PerformanceObserver.supportedEntryTypes.indexOf("longtask")>=0||
+            PerformanceObserver.supportedEntryTypes.indexOf("element")>=0)){
+          p=new PerformanceObserver(function(e){e.getEntries().forEach(function(e){
+            switch(e.entryType){case"element":i.push(e);break;case"longtask":o.push(e);break;default:break}})});
+          p.observe({entryTypes:["longtask","element"]})}e[s+"lt"]={
+          longTasks:o,timingElements:i,inPageLoad:c,observer:p};if(t){var u=r.createElement(n);u.async=1;
+          u.src=t;var f=r.getElementsByTagName(n)[0];f.parentNode.insertBefore(u,f)}})
+      (window,document,"script","/rum.js","strumUS");
+    </script>
+
+    <script type="text/javascript">
+      window.SCE_DEBUG = true;
+      window.STRUM_CONTEXTS = ['strumTest', 'strumUS'];
+      strum('config', { token: sematextExperienceToken, 'receiverUrl': sematextExperienceReceiverURL });
+    </script>
+    
+    <script>
+      var i = 1;
+      window.sendRequest = function () {
+        $.get('http://localhost:3000');
+      }
+      window.addImage = function() {
+        $("#images").append($('<img src="https://place-hold.it/300x500/666?a=' + i++ + '" />'));
+        $("#images").append($('<img src="https://place-hold.it/300x500/666?a=' + i++ + '" />'));
+        $("#images").append($('<img src="https://place-hold.it/300x500/666?a=' + i++ + '" />'));
+        $("#images").append($('<img src="https://place-hold.it/300x500/666?a=' + i++ + '" />'));
+      }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Bootstrap 3</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle">Getting started <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://getbootstrap.com/getting-started/#download">Download Bootstrap</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Examples</li>
+                        <li><a href="http://getbootstrap.com/getting-started/#template">Basic template</a></li>
+                        <li><a href="http://getbootstrap.com/examples/starter-template/">Starter template</a></li>
+                        <li><a href="http://getbootstrap.com/examples/grid/">Grids</a></li>
+                        <li><a href="http://getbootstrap.com/examples/jumbotron/">Jumbotron</a></li>
+                        <li><a href="http://getbootstrap.com/examples/navbar/">Navbar</a></li>
+                        <li><a href="http://getbootstrap.com/examples/signin/">Sign-in page</a></li>
+                        <li><a href="http://getbootstrap.com/examples/sticky-footer/">Sticky footer</a></li>
+                        <li><a href="http://getbootstrap.com/examples/offcanvas/">Offcanvas</a></li>
+                        <li><a href="http://getbootstrap.com/examples/carousel/">Carousel</a></li>
+                        <li><a href="http://getbootstrap.com/examples/theme/">Theme</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Compatibility</li>
+                        <li><a href="http://getbootstrap.com/getting-started/#migration">Migrating from 2.x to 3.0</a></li>
+                        <li><a href="http://getbootstrap.com/getting-started/#browsers">Browser support</a></li>
+                        <li><a href="http://getbootstrap.com/getting-started/#third-parties">Third party support</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://getbootstrap.com/css">CSS</a></li>
+                <li><a href="http://getbootstrap.com/components">Components</a></li>
+                <li><a href="http://getbootstrap.com/javascript">JavaScript</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="http://getbootstrap.com/customize">Customize</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <h1>RUM Script Test</h1>
+        <p class="lead">Use buttons below to test</p>
+        <p><button class="btn btn-lg btn-primary" type="button" onclick="sendRequest()">Send AJAX Request</button></p>
+        <p><button class="btn btn-lg btn-primary" type="button" onclick="addImage()">Add image</button></p>
+        <div id="images"></div>
+    </div>
+</div>
+</body>
+</html>

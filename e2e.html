@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>Cypress Test HTML File</title>
+    <script type="text/javascript">
+      const sematextExperienceToken = '8763d12d-1j3t-932v-b498-544290z98k43';
+      const sematextExperienceReceiverURL = 'https://rum-receiver.test.sematext.com';
+    </script>
+
+    <script type="text/javascript">
+      (function(e,r,n,t,s){var a=[];e[s]=function(){a.push(arguments)};e[s].queue=a;var o=[];var c=[];var i=true;var p=void 0;if(window.PerformanceObserver&&window.PerformanceObserver.supportedEntryTypes&&(PerformanceObserver.supportedEntryTypes.indexOf("longtask")>=0||PerformanceObserver.supportedEntryTypes.indexOf("element")>=0)){try{p=new PerformanceObserver(function(e){e.getEntries().forEach(function(e){switch(e.entryType){case"element":c.push(e);break;case"longtask":o.push(e);break;default:break}})});p.observe({entryTypes:["longtask","element"]});e[s+"lt"]={longTasks:o,timingElements:c,inPageLoad:i,observer:p}}catch(e){console.log("Global LongTasks and ElementTimingObserver not supported")}}if(t){var l=r.createElement(n);l.async=1;l.src=t;var u=r.getElementsByTagName(n)[0];u.parentNode.insertBefore(l,u)}})(window,document,"script","/rum.js","strum");
+    </script>
+    <script type="text/javascript">
+      window.STRUM_CONTEXTS = ['strum'];
+      strum('config', { token: sematextExperienceToken, receiverUrl: sematextExperienceReceiverURL });
+    </script>
+    <script type="text/javascript">
+      function moveTurtle(maxTime) {
+        const startedAt = performance.now();
+        let i = 1;
+        while (true) {
+          var x = i * 10 + Math.log10(i);
+          if (performance.now() - startedAt > maxTime) {
+            break;
+          }
+          i++;
+        }
+      }
+
+      const url = new URL(window.location.href);
+      if (url.searchParams.get('slow')) {
+        moveTurtle(500);
+      }
+    </script>
+    <script>
+      window.sendRequest = function () {
+        $.get('/');
+      };
+      window.sendRoutedRequest = function (route) {
+        $.get('/data');
+      };
+      window.sendWithLongJob = function () {
+        strum('routeChange', '/something');
+        moveTurtle(500);
+        $.get('/');
+      };
+      window.addTextElement = function () {
+        strum('routeChange', '/somethingnew');
+        const paragraph = document.createElement("p");
+        paragraph.setAttribute("elementtiming", "soft_page_load_element_timing");
+        paragraph.append(document.createTextNode("This is soft page load generated element"));
+        document.getElementById("sploadtest").appendChild(paragraph);
+        $.get('/');
+      };
+      window.addTextElementWithoutRoute = function () {
+        const paragraph = document.createElement("p");
+        paragraph.setAttribute("elementtiming", "element_timing_without_route_change");
+        paragraph.append(document.createTextNode("This is element generated without route change"));
+        document.getElementById("sploadtest").appendChild(paragraph);
+        //$.get('/');
+      };
+      window.sendOnPageTransaction = function () {
+        // generate 200ms on-page transaction
+        strum('startTransaction', 'SomeTransaction');
+        setTimeout(() => strum('endTransaction', 'SomeTransaction'), 200);
+      }
+    </script>
+</head>
+<body>
+    <p elementtiming="test_div_for_element_timing">Element Timing Paragraph</p>
+    <div id="sploadtest"></div>
+    <div class="container">
+        <p><button id="send" onclick="sendRequest()">Send</button></p>
+        <p><button id="sendRouted" onclick="sendRoutedRequest()">SendRouted</button></p>
+        <p><button id="sendWithLongJob" onclick="sendWithLongJob()">SendWithLongJob</button></p>
+        <p><button id="addTextElement" onclick="addTextElement()">AddTextElement</button></p>
+        <p><button id="onPageTrx" onclick="sendOnPageTransaction()">SendOnPageTransaction</button></p>
+        <p><button id="addTextElementWithoutRoute" onclick="addTextElementWithoutRoute()">AddTextElementWithoutRoute</button></p>
+    </div>
+    <p elementtiming="test_div_for_element_timing_second">Second Element Timing Paragraph</p>
+    <img elementtiming="test_img_element" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+    AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+        9TXL0Y4OHwAAAABJRU5ErkJggg==" />
+</body>
+</html>

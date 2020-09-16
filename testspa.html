@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Experience Single Page Application Test</title>
+    <meta charset="utf-8">
+
+    <script type="text/javascript">
+      const sematextExperienceToken = '8763d12d-1j3t-932v-b498-544290z98k43';
+      const sematextExperienceReceiverURL = 'https://rum-receiver.sematext.com';
+    </script>
+
+    <script type="text/javascript">
+      // Those can be adjusted
+      const routeChangeInterval = 10000;
+      const xmlRequestInterval = 5000;
+    </script>
+
+    <script type="text/javascript">
+      window.SCE_DEBUG = true;
+      var numXMLHttpRequests = 0;
+      var numRouteChanges = 0;
+      var active = false;
+
+      function update() {
+        document.getElementById('numXMLRequestsInput').value = numXMLHttpRequests;
+        document.getElementById('numRouteChangesInput').value = numRouteChanges;
+        document.getElementById('startStopButton').value = active ? "Stop" : "Start";
+      }
+
+      function updateHiddenContent(routeChangeUrl) {
+        document.getElementById('testContent').innerHTML = routeChangeUrl;
+      }
+
+      function startStop() {
+        active = !active;
+        update();
+      }
+
+      window.setInterval(function() {
+        if (active) {
+          numXMLHttpRequests++;
+          const xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            update();
+          };
+          xhttp.open("GET", '/');
+          xhttp.send();
+        }
+      }, xmlRequestInterval);
+
+      window.setInterval(function() {
+        if (active) {
+          numRouteChanges++;
+          const routeChangeURL = '/change/' + numRouteChanges;
+          strum('routeChange', routeChangeURL);
+          updateHiddenContent(routeChangeURL);
+          update();
+        }
+      }, routeChangeInterval);
+    </script>
+
+    <script type="text/javascript">
+      (function(e,r,n,t,s){var a=[];e[s]=function(){a.push(arguments)};e[s].queue=a;var o=[];var i=[];var c=true;
+        var p=void 0;if(window.PerformanceObserver&&window.PerformanceObserver.supportedEntryTypes&&
+          (PerformanceObserver.supportedEntryTypes.indexOf("longtask")>=0||
+            PerformanceObserver.supportedEntryTypes.indexOf("element")>=0)){
+          p=new PerformanceObserver(function(e){e.getEntries().forEach(function(e){
+            switch(e.entryType){case"element":i.push(e);break;case"longtask":o.push(e);break;default:break}})});
+          p.observe({entryTypes:["longtask","element"]})}e[s+"lt"]={
+          longTasks:o,timingElements:i,inPageLoad:c,observer:p};if(t){var u=r.createElement(n);u.async=1;
+          u.src=t;var f=r.getElementsByTagName(n)[0];f.parentNode.insertBefore(u,f)}})
+      (window,document,"script","/rum.js","strum");
+    </script>
+
+    <script type="text/javascript">
+      strum('config', { token: sematextExperienceToken, 'receiverUrl': sematextExperienceReceiverURL });
+    </script>
+</head>
+<body>
+    <h1>Experience Single Page Application Test</h1>
+    <table>
+        <tr>
+            <td>
+                <label for="numXMLRequestsInput" style="font-weight: bold;">Number of Ajax Requests:</label>
+            </td>
+            <td>
+                <input type="text" style="width: 50px; text-align: right; font-size: 16px; font-weight: bolder;" id="numXMLRequestsInput" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="numRouteChangesInput" style="font-weight: bold;">Number of Route Changes:</label>
+            </td>
+            <td>
+                <input type="text" style="width: 50px; text-align: right; font-size: 16px; font-weight: bolder;" id="numRouteChangesInput" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="text-align: right;"><input type="button" id="startStopButton" value="Start" onclick="startStop()" /></td>
+        </tr>
+    </table>
+
+    <div>
+        <table>
+            <tr>
+                <td>Route change URL:</td>
+                <td><div id="testContent"></div></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script type="text/javascript">
+      update();
+    </script>
+</body>
+</html>
