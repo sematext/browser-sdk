@@ -30,7 +30,7 @@ class WebVitalsDispatcher implements Dispatcher {
 
   handleMetric(metricName: string, value: number) {
     this.executors.forEach(e =>
-      e.execute('vital-metric', { metricName, value }));
+      e.execute('vitalMetric', { metricName, value }));
   }
 
   start() {

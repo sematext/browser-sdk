@@ -23,7 +23,7 @@ const commands = {
   routeChange: RouteChangeCommand,
   longTask: LongTaskCommand,
   elementTiming: ElementTimingCommand,
-  'vital-metric': VitalMetricCommand,
+  vitalMetric: VitalMetricCommand,
 };
 
 export type CommandType = $Keys<typeof commands>;
