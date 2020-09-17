@@ -1,5 +1,5 @@
 # Sematext Browser SDK
-Repository containing the Browser SDK for the [Semtext Experience](https://sematext.com/experience/). It is used to collect end-user data from browsers using various APIs and is designed to work for traditional web applications as well as single-paged ones. The collected data includes:
+Repository containing the Browser SDK for the [Sematext Experience](https://sematext.com/experience/). It is used to collect end-user data from browsers using various browser APIs. It is designed to work with traditional web applications as well as single-page apps (SPAs). The collected data includes:
 
  - Page load metrics,
  - HTTP requests metrics,
@@ -14,18 +14,17 @@ Repository containing the Browser SDK for the [Semtext Experience](https://semat
 
 ## Development
 
-There are two parts to this script: the script itself, and the small loader
+There are two parts to this script: the RUM script itself, and the small loader
 script. 
 
-The loader script will actually add the `<script>` tags for loading the
-RUM script and will keep track of any commands send to the script while it was
-still loading. When the RUM script finally loads it will read any pending
-commands and execute them.
+The loader script actually add the `<script>` tags for loading the
+RUM script and it keeps track of any commands sent to the script while the script was
+still loading. When the RUM script loads it reads any pending
+commands and executes them.
 
-**Please note that the loader and rum script depend on each other, and that
-before changing the scripts you should keep in mind that website
-developer who have already added the script to their website will use the older
-loader script.**
+**Please note that the loader and the RUM script depend on each other.
+Before changing the scripts keep in mind that developers who have already added the script
+to their website will use the older loader script unless they update it.**
 
 ### Working on the RUM script
 
@@ -47,19 +46,19 @@ the loader script. To generate the minified snippet for use `yarn run generate-s
 
 ### Manual Tests
 
-You can test the loader and rum script using one of the ***test*** websites that are provided:
+You can test the loader and RUM scripts using one of the ***test*** websites that are provided:
 
  - `test.html` - simple app that can be used to generate page load events and HTTP requests 
  - `testspa.html` - simple single-page app used to generate `routeChange` events and HTTP requests 
- - `large.html` - app used for testing large requests from RUM script
+ - `large.html` - app used for testing large requests sent from the RUM script
  - `e2e.html` - app used for most of the integration tests 
 
-Run `yarn run start` to run a small test website which will be running the dev
-version of the rum script. After making changes to the script, reload the
+Run `yarn run start` to run a small test website which runs the dev
+version of the RUM script. After making changes to the script, reload the
 website to see the changes. 
 
 If you wish to automatically test single page applications there is a second test application
-called `spa.html` (ses `testspa.html` file) which you start by running `yarn run start`. It 
+called `spa.html` (see `testspa.html` file) which you start by running `yarn run start`. It 
 automatically runs `routeChange` commands every 10 seconds and HTTP requests every 5 seconds.
 
 ### Automatic Tests
@@ -70,7 +69,7 @@ features of the script itself. The tests are using the same set of HTML files us
 by the manual tests.  
 
 To run the full set of tests run `yarn e2e`. The results will include a table with test
-results similar to the following one:
+results similar to the following:
 
 ```
      Spec                                              Tests  Passing  Failing  Pending  Skipped
@@ -94,8 +93,8 @@ results similar to the following one:
 
 ## Sending data to multiple receivers 
 
-In order to configure the script to send data to multiple rum receivers you
-need to add the rum snippet multiple times. Only the first snippet should have
+In order to configure the RUM script to send data to multiple RUM receivers you
+need to add the RUM snippet multiple times. Only the first snippet should have
 URL to the RUM script set so that it's loaded only once, for example:
 
 ```html
@@ -133,4 +132,4 @@ URL to the RUM script set so that it's loaded only once, for example:
 
 ## Contributing
 
-Pull requests for bug fixes, improvements and new features are more than welcome. When opening a new pull request please take the time to briefly describe the changes. Make sure that the newly introduced code passes the `lint` and `flow` checks along with the integration tests. Once the PR is submitted Sematext will review and merge your changes.
+Pull requests for bug fixes, improvements and new features are more than welcome. When opening a new pull request please take the time to briefly describe the changes. Make sure that the newly introduced code passes the `lint` and `flow` checks along with the integration tests. Once the PR is submitted we will review and merge your changes.
