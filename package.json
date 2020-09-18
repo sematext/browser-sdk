@@ -28,7 +28,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "clean-webpack-plugin": "^0.1.19",
-    "cypress": "4.5.0",
+    "cypress": "4.12.1",
     "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-cypress": "^2.11.1",

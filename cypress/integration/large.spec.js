@@ -37,7 +37,8 @@ describe('RUM Large Requests Script Tests', () => {
       assert.isNotNull(xhr.request.body);
       assert.isAbove(xhr.request.body.body.vitals.length, 0);
     });
-    
+
+
     // next request should be page load data
     cy.wait(['@sendData']).then((xhr) => {
       assert.isNotNull(xhr.request.body);
