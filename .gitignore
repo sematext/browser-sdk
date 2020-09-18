@@ -3,6 +3,11 @@ node_modules
 build
 yarn-error.log
 
+# ignore project related files
+.classpath
+.project
+.settings/
+
 # Deploy related files
 invalidation.json
 
