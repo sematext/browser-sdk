@@ -14,13 +14,24 @@ Repository containing the Browser SDK for the [Sematext Experience](https://sema
 
 ## Development
 
-There are two parts to this script: the RUM script itself, and the small loader
-script. 
+The RUM script is developed using [ECMAScript 2015](https://en.wikipedia.org/wiki/ECMAScript). For builds and development it uses:
+ 
+ - `npm` - [Node package manager](https://npm.org)
+ - `yarn` - [Package dependency manager](https://yarnpkg.com)
+ - `flow` - [Static type checker](https://flow.org)
+ - `Cypress.io` - [Integration tests framework](https://www.cypress.io)
 
-The loader script actually add the `<script>` tags for loading the
-RUM script and it keeps track of any commands sent to the script while the script was
-still loading. When the RUM script loads it reads any pending
-commands and executes them.
+### The RUM Script Architecture
+
+There are two parts of the RUM script: 
+
+ - The loader script
+ - The metrics gathering script
+
+The loader script is responsible for loading the metrics gathering script. 
+It adds the actual `<script>` tags with the content of the main metric script. 
+The loader script keeps track and buffers commands that will be sent once the 
+metrics gathering script loads and is configured.
 
 **Please note that the loader and the RUM script depend on each other.
 Before changing the scripts keep in mind that developers who have already added the script
@@ -37,12 +48,28 @@ Flow to catch any type errors, and use the following commands:
  - `yarn run build` to build the production bundle
  - `yarn run dev` to build the development (not minified) bundle
 
-### Working on the loader script
+### Working on the Loader Script
 
-Start by looking at `src/snippet.js`. This is the unminified es2015 version of
-the loader script. To generate the minified snippet for use `yarn run generate-snippet`.
+The main entry point of the loader script is in `src/snippet.js`. 
+This is the unminified [ES2015]((https://en.wikipedia.org/wiki/ECMAScript)) version 
+of the loader script which is responsible for loading the metrics gathering script. 
+
+To generate the minified snippet of the loader script use `yarn run generate-snippet`.
 
 **Keep in mind that the loader script should be compact.**
+
+### Working on the Main RUM Script
+
+The main entry point of the RUM script is in `src/index.js`. Use `eslint` to catch any 
+style issues and `flow` to catch any type errors.
+
+You can use the following commands:
+
+ - `yarn run start` to start the development server
+ - `yarn run lint` to run `lint` on the code
+ - `yarn run flow` to run `flow` type checks
+ - `yarn run build` to build the production bundle
+ - `yarn run dev` to build the development (not minified) bundle
 
 ### Manual Tests
 
