@@ -37,17 +37,6 @@ metrics gathering script loads and is configured.
 Before changing the scripts keep in mind that developers who have already added the script
 to their website will use the older loader script unless they update it.**
 
-### Working on the RUM script
-
-Start by looking at `src/index.js`. Use `eslint` to catch any style issues and
-Flow to catch any type errors, and use the following commands:
-
- - `yarn run start` to start the development server
- - `yarn run lint` to lint the code
- - `yarn run flow` to run Flow type checks
- - `yarn run build` to build the production bundle
- - `yarn run dev` to build the development (not minified) bundle
-
 ### Working on the Loader Script
 
 The main entry point of the loader script is in `src/snippet.js`. 
