@@ -12,5 +12,5 @@ cache:
   directories:
     - ~/.cache
 script:
-  - $(npm bin)/print-env TRAVIS
+  - npm run lint
   - npm run e2e
