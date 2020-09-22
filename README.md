@@ -1,4 +1,8 @@
 # Sematext Browser SDK
+
+[![Build Status](https://travis-ci.org/sematext/browser-sdk.svg?branch=master)](https://travis-ci.org/sematext/browser-sdk)
+[![License](https://img.shields.io/github/license/sematext/browser-sdk)](https://img.shields.io/github/license/sematext/browser-sdk)
+
 Repository containing the Browser SDK for the [Sematext Experience](https://sematext.com/experience/). It is used to collect end-user data from browsers using various browser APIs. It is designed to work with traditional web applications as well as single-page apps (SPAs). The collected data includes:
 
  - Page load metrics,
