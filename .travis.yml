@@ -1,0 +1,21 @@
+os:
+  - linux
+
+language: node_js
+
+node_js:
+  - 14.11
+
+addons:
+  apt:
+    packages:
+    - libgconf-2-4
+
+cache:
+  npm: true
+  directories:
+    - ~/.cache
+
+script:
+  - $(npm bin)/print-env TRAVIS
+  - npm run e2e
