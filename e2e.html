@@ -14,6 +14,7 @@
     <script type="text/javascript">
       window.STRUM_CONTEXTS = ['strum'];
       strum('config', { token: sematextExperienceToken, receiverUrl: sematextExperienceReceiverURL });
+      strum('identify', { identifier: 'testuser', name: 'testuser', tags: { someTag: 'default' } });
     </script>
     <script type="text/javascript">
       function moveTurtle(maxTime) {
@@ -64,6 +65,11 @@
         strum('startTransaction', 'SomeTransaction');
         setTimeout(() => strum('endTransaction', 'SomeTransaction'), 200);
       }
+      window.sendOnPageTransactionWithTagOverriden = function () {
+        // generate 200ms on-page transaction
+        strum('startTransaction', 'SomeTransaction', { someTag: 'overriden' });
+        setTimeout(() => strum('endTransaction', 'SomeTransaction'), 200);
+      }
     </script>
 </head>
 <body>
@@ -75,6 +81,7 @@
         <p><button id="sendWithLongJob" onclick="sendWithLongJob()">SendWithLongJob</button></p>
         <p><button id="addTextElement" onclick="addTextElement()">AddTextElement</button></p>
         <p><button id="onPageTrx" onclick="sendOnPageTransaction()">SendOnPageTransaction</button></p>
+        <p><button id="onPageTrx2" onclick="sendOnPageTransactionWithTagOverriden()">SendOnPageTransactionWithTagOverriden</button></p>
         <p><button id="addTextElementWithoutRoute" onclick="addTextElementWithoutRoute()">AddTextElementWithoutRoute</button></p>
     </div>
     <p elementtiming="test_div_for_element_timing_second">Second Element Timing Paragraph</p>

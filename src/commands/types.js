@@ -5,6 +5,7 @@ export type UserInfo = {
   name: ?string,
   identifier: string,
   anonymous: boolean,
+  tags: ?Object,
 };
 
 export type CommandContext = {

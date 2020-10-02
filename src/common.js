@@ -64,10 +64,17 @@ export const getConnectionType = () => {
   return c && c.effectiveType;
 };
 
-export const getDefaultMeta = (context: CommandContext) => ({
-  user: context.user || ({
+export const getDefaultMeta = (context: CommandContext, mergeTags: ?Object) => ({
+  user: context.user ? ({
+    ...context.user,
+    tags: {
+      ...context.user.tags,
+      ...mergeTags,
+    },
+  }) : ({
     identifier: context.anonUserID,
     anonymous: true,
+    tags: mergeTags,
   }),
   sessionID: context.sessionID,
   release: context.config && context.config.release,
