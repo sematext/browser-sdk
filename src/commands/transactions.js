@@ -18,9 +18,16 @@ class StartTransactionCommand implements Command {
 
     const name: string = args[0];
 
+    const tags: Object = args[1];
+
+    if (tags && typeof tags !== 'object') {
+      throw new Error('if provided, second argument `tags` should be an object');
+    }
+
     if (!transactions[name]) {
       transactions[name] = {
         startTime: new Date(),
+        tags,
       };
     }
   }
@@ -44,14 +51,14 @@ class EndTransactionCommand implements Command {
       throw new Error(`transaction "${name}" was never started`);
     }
 
-    const { startTime } = transactions[name];
+    const { startTime, tags } = transactions[name];
     const endTime = new Date();
 
     const doc = {
       name,
       startTime: startTime.toISOString(),
       endTime: endTime.toISOString(),
-      meta: getDefaultMeta(this.context),
+      meta: getDefaultMeta(this.context, tags),
     };
 
     const { uploader } = this.context;
