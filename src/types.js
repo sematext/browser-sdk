@@ -9,7 +9,8 @@ export type Configuration = {
   ignoreOrigins: ?Array<string>,
 }
 
-export type MetricType = 'pageLoad' | 'ajax' | 'transaction' | 'routeChange' | 'longTask' | 'elementTiming' | 'vitals';
+export type MetricType = 'pageLoad' | 'ajax' | 'transaction' | 'routeChange' | 'longTask' |
+  'elementTiming' | 'vitals' | 'memoryUsage';
 
 export interface Uploader {
   enqueue(source: Object, type: MetricType): void,
