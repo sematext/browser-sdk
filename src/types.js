@@ -10,7 +10,7 @@ export type Configuration = {
 }
 
 export type MetricType = 'pageLoad' | 'ajax' | 'transaction' | 'routeChange' | 'longTask' |
-  'elementTiming' | 'vitals' | 'memoryUsage';
+  'elementTiming' | 'vitals' | 'memoryUsages';
 
 export interface Uploader {
   enqueue(source: Object, type: MetricType): void,

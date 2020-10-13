@@ -1,5 +1,7 @@
 /* @flow */
 import type { Command, CommandContext } from './types';
+import { getPageLoadUuid } from './PageLoadCommand';
+import { getDefaultMeta, toUrlInfo } from '../common';
 
 class MemoryUsageCommand implements Command {
   context: CommandContext;
@@ -13,12 +15,47 @@ class MemoryUsageCommand implements Command {
       throw new Error('invalid payload argument');
     }
 
-    const { uploader } = this.context;
-    const payload = args[0];
+    const { uploader, config } = this.context;
+    const { breakdown } = args[0];
+    const timestamp = new Date();
+    const resolveUrl = config && config.resolveUrl;
+    const pageLoadUuid = getPageLoadUuid();
+    const url = toUrlInfo(window.location, resolveUrl);
+    const meta = getDefaultMeta(this.context);
 
-    if (payload && uploader) {
-      uploader.enqueue(payload, 'memoryUsage');
-    }
+    breakdown.forEach((measurement) => {
+      const {
+        attribution,
+        bytes,
+        userAgentSpecificTypes,
+      } = measurement;
+
+      // create attribution objects
+      const attributionArray = [];
+      attribution.forEach((attrib) => {
+        if (typeof attrib === 'string') {
+          attributionArray.push({
+            url: attrib,
+          });
+        } else {
+          attributionArray.push(attrib);
+        }
+      });
+
+      const usage = {
+        bytes,
+        attribution: attributionArray,
+        userAgentSpecificTypes,
+        pageLoadUuid,
+        '@timestamp': timestamp.toISOString(),
+        url,
+        meta,
+      };
+
+      if (usage && uploader) {
+        uploader.enqueue(usage, 'memoryUsages');
+      }
+    });
   }
 }
 
