@@ -27,8 +27,21 @@ class MemoryUsageDispatcher implements Dispatcher {
     }
 
     if (!this.started) {
+      // check if the page is loaded
+      if (document.readyState === 'complete') {
+        this.checkStateAndSchedule();
+      } else {
+        // if the page is not loaded, add listener
+        document.addEventListener('readystatechange', () => {
+          this.checkStateAndSchedule();
+        });
+      }
+    }
+  }
+
+  checkStateAndSchedule() {
+    if (document.readyState === 'complete') {
       this.started = true;
-      // start the first measurement almost right away
       this.scheduleMeasurement(100);
     }
   }
