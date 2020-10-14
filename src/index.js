@@ -36,7 +36,7 @@ visibilityObserver.addListener(elementTimingDispatcher);
 // we're not adding web vitals dispatcher to the visibility observer because we
 // don't control the implementation of how metric are collected and I believe
 // that web-vitals already does some visibility change handling.
-// We don't want to add memoryUsageDispatcher to visibility obeserver as well.
+// We don't want to add memoryUsageDispatcher to visibility observer as well.
 
 contextNames.forEach((contextName) => {
   const context = setupContext(contextName);
