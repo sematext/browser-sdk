@@ -12,6 +12,7 @@ import type {
 } from './types';
 import LongTaskCommand from './LongTaskCommand';
 import ElementTimingCommand from './ElementTimingCommand';
+import MemoryUsageCommand from './MemoryUsageCommand';
 
 const commands = {
   config: ConfigCommand,
@@ -24,6 +25,7 @@ const commands = {
   longTask: LongTaskCommand,
   elementTiming: ElementTimingCommand,
   vitalMetric: VitalMetricCommand,
+  memoryUsage: MemoryUsageCommand,
 };
 
 export type CommandType = $Keys<typeof commands>;

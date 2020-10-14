@@ -205,6 +205,7 @@ class RumUploader implements Uploader {
       longTask: [],
       elementTiming: [],
       vitals: [],
+      memoryUsages: [],
     };
     let requestSize = 0;
     let batchid = 0;
@@ -230,6 +231,7 @@ class RumUploader implements Uploader {
           longTask: [],
           elementTiming: [],
           vitals: [],
+          memoryUsages: [],
         };
       }
     }
