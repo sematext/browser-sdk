@@ -27,7 +27,7 @@ class MemoryUsageCommand implements Command {
     if (bytes && uploader) {
       const totalUsageObject = {
         bytes,
-        totalBytes: 'true',
+        totalBytes: true,
         attribution: [],
         userAgentSpecificTypes: [],
         pageLoadUuid,
