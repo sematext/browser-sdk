@@ -23,7 +23,21 @@ class MemoryUsageCommand implements Command {
     const url = toUrlInfo(window.location, resolveUrl);
     const meta = getDefaultMeta(this.context);
 
-    const totalBytes = bytes;
+    // we add one additional object with total bytes
+    if (bytes && uploader) {
+      const totalUsageObject = {
+        bytes,
+        totalBytes: 'true',
+        attribution: [],
+        userAgentSpecificTypes: [],
+        pageLoadUuid,
+        '@timestamp': timestamp.toISOString(),
+        url,
+        meta,
+      };
+      uploader.enqueue(totalUsageObject, 'memoryUsages');
+    }
+
     breakdown.forEach((measurement) => {
       const {
         attribution,
@@ -45,7 +59,6 @@ class MemoryUsageCommand implements Command {
       });
 
       const usage = {
-        totalBytes,
         bytes,
         attribution: attributionArray,
         userAgentSpecificTypes,
