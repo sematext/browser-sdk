@@ -16,16 +16,18 @@ class MemoryUsageCommand implements Command {
     }
 
     const { uploader, config } = this.context;
-    const { breakdown } = args[0];
+    const { breakdown, bytes } = args[0];
     const timestamp = new Date();
     const resolveUrl = config && config.resolveUrl;
     const pageLoadUuid = getPageLoadUuid();
     const url = toUrlInfo(window.location, resolveUrl);
     const meta = getDefaultMeta(this.context);
 
+    const totalBytes = bytes;
     breakdown.forEach((measurement) => {
       const {
         attribution,
+        // eslint-disable-next-line no-shadow
         bytes,
         userAgentSpecificTypes,
       } = measurement;
@@ -43,6 +45,7 @@ class MemoryUsageCommand implements Command {
       });
 
       const usage = {
+        totalBytes,
         bytes,
         attribution: attributionArray,
         userAgentSpecificTypes,
