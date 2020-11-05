@@ -18,16 +18,16 @@ Repository containing the Browser SDK for the [Sematext Experience](https://sema
 
 ## Development
 
-The RUM script is developed using [ECMAScript 2015](https://en.wikipedia.org/wiki/ECMAScript). For builds and development it uses:
+The Experience script is developed using [ECMAScript 2015](https://en.wikipedia.org/wiki/ECMAScript). For builds and development it uses:
  
  - `npm` - [Node package manager](https://npm.org)
  - `yarn` - [Package dependency manager](https://yarnpkg.com)
  - `flow` - [Static type checker](https://flow.org)
  - `Cypress.io` - [Integration tests framework](https://www.cypress.io)
 
-### The RUM Script Architecture
+### The Experience Script Architecture
 
-There are two parts of the RUM script: 
+There are two parts of the Experience script: 
 
  - The loader script
  - The metrics gathering script
@@ -37,7 +37,7 @@ It adds the actual `<script>` tags with the content of the main metric script.
 The loader script keeps track and buffers commands that will be sent once the 
 metrics gathering script loads and is configured.
 
-**Please note that the loader and the RUM script depend on each other.
+**Please note that the loader and the Experience script depend on each other.
 Before changing the scripts keep in mind that developers who have already added the script
 to their website will use the older loader script unless they update it.**
 
@@ -51,9 +51,9 @@ To generate the minified snippet of the loader script use `yarn run generate-sni
 
 **Keep in mind that the loader script should be compact.**
 
-### Working on the Main RUM Script
+### Working on the Main Experience Script
 
-The main entry point of the RUM script is in `src/index.js`. Use `eslint` to catch any 
+The main entry point of the Experience script is in `src/index.js`. Use `eslint` to catch any 
 style issues and `flow` to catch any type errors.
 
 You can use the following commands:
@@ -66,15 +66,15 @@ You can use the following commands:
 
 ### Manual Tests
 
-You can test the loader and RUM scripts using one of the ***test*** websites that are provided:
+You can test the loader and Experience scripts using one of the ***test*** websites that are provided:
 
  - `test.html` - simple app that can be used to generate page load events and HTTP requests 
  - `testspa.html` - simple single-page app used to generate `routeChange` events and HTTP requests 
- - `large.html` - app used for testing large requests sent from the RUM script
+ - `large.html` - app used for testing large requests sent from the Experience script
  - `e2e.html` - app used for most of the integration tests 
 
 Run `yarn run start` to run a small test website which runs the dev
-version of the RUM script. After making changes to the script, reload the
+version of the Experience script. After making changes to the script, reload the
 website to see the changes. 
 
 If you wish to automatically test single page applications there is a second test application
@@ -113,9 +113,9 @@ results similar to the following:
 
 ## Sending data to multiple receivers 
 
-In order to configure the RUM script to send data to multiple RUM receivers you
-need to add the RUM snippet multiple times. Only the first snippet should have
-URL to the RUM script set so that it's loaded only once, for example:
+In order to configure the Experience script to send data to multiple Experience receivers you
+need to add the Experience snippet multiple times. Only the first snippet should have
+URL to the Experience script set so that it's loaded only once, for example:
 
 ```html
 <script type="text/javascript">
@@ -152,4 +152,7 @@ URL to the RUM script set so that it's loaded only once, for example:
 
 ## Contributing
 
-Pull requests for bug fixes, improvements and new features are more than welcome. When opening a new pull request please take the time to briefly describe the changes. Make sure that the newly introduced code passes the `lint` and `flow` checks along with the integration tests. Once the PR is submitted we will review and merge your changes.
+Pull requests for bug fixes, improvements and new features are more than welcome. When opening 
+a new pull request please take the time to briefly describe the changes. Make sure that the newly 
+introduced code passes the `lint` and `flow` checks along with the integration tests. Once the PR 
+is submitted we will review and merge your changes.
