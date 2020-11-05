@@ -4,14 +4,14 @@ BUCKET=$1
 CF_DISTRIBUTION=$2
 AWS_OPT=""
 
-echo "Deploying script to S3 bucket: $BUCKET using Cloudfront distribution ID: $CF_DISTRIBUTION" 
+echo "Deploying script to S3 bucket: $BUCKET using Cloudfront distribution ID: $CF_DISTRIBUTION"
 
 HEAD=$(git rev-parse HEAD)
 cat > invalidation.json <<- EOM
 {
   "Paths": {
     "Quantity": 1,
-    "Items": ["/rum.js*"]
+    "Items": ["/experience.js*"]
   },
   "CallerReference": "$HEAD"
 }

@@ -12,7 +12,7 @@ module.exports = {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'rum.js',
+    filename: 'experience.js',
     publicPath: '/',
   },
   plugins: [

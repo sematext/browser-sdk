@@ -10,7 +10,7 @@ const GLOBALS = {
 module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'rum.js',
+    filename: 'experience.js',
   },
   plugins: [
     new webpack.ExtendedAPIPlugin(),
