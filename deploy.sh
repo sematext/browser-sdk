@@ -20,7 +20,8 @@ EOM
 # Build script
 ./build.sh
 
-aws s3 sync ./dist/ s3://$BUCKET $AWS_OPT
+aws s3 cp ./dist/experience.js s3://$BUCKET $AWS_OPT
+aws s3 cp ./dist/experience.js.LICENSE.txt s3://$BUCKET $AWS_OPT
 
 aws cloudfront create-invalidation \
     --invalidation-batch file://invalidation.json \
