@@ -127,4 +127,50 @@ describe('On-Page Transactions', () => {
       expect(transactions[0].meta.user.name).to.equal('testuser');
     });
   });
+
+  it('Tracks performance.measure() entries', () => {
+    // open the e2e.html page
+    cy.visit('/e2e.html');
+
+    // start the Cypress server to be able to stub responses
+    cy.server();
+
+    // define stubbed route for sampling
+    cy.route({
+      method: 'HEAD',
+      url: '/sampling/*',
+      status: 200,
+      response: {},
+      headers: {
+        'X-Sematext-Experience-App-Active': true,
+        'X-Sematext-Experience-Sampling-Active': false,
+        'X-Sematext-Experience-Sampling-NextEvent': true,
+        'X-Sematext-Experience-Sampling-Percentage': 100,
+      },
+    }).as('head');
+
+    // define stubbed route for sending data
+    cy.route({
+      method: 'POST',
+      url: '/api/v1/apps/8763d12d-1j3t-932v-b498-544290z98k43/data*',
+      status: 200,
+      response: {
+        error: false,
+        message: 'accepted event',
+      },
+    }).as('sendData');
+
+    // wait for initial page load to be sent
+    cy.wait('@sendData');
+
+    cy.contains('SendOnPageTransactionWithMeasure').click();
+    cy.wait('@sendData').then((xhr) => {
+      assert.isNotNull(xhr.request.body);
+      assert.isNotNull(xhr.request.body.body.transaction);
+
+      const transactions = xhr.request.body.body.transaction;
+      expect(transactions.length).to.equal(1);
+      expect(transactions[0].name).to.equal('WithMeasure');
+    });
+  });
 });
