@@ -62,7 +62,6 @@ class MeasureDispatcher implements Dispatcher {
       const entries = list.getEntries();
       entries.forEach((entry) => {
         const { name, startTime, duration } = entry;
-        console.log(entry);
         this.executors.forEach(e => e.execute('recordTransaction', name, startTime, duration));
       });
     }
