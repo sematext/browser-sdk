@@ -16,6 +16,7 @@ import DocumentVisibilityObserver from './DocumentVisibilityObserver';
 import ElementTimingDispatcher from './dispatchers/ElementTimingDispatcher';
 import WebVitalsDispatcher from './dispatchers/WebVitalsDispatcher';
 import MemoryUsageDispatcher from './dispatchers/MemoryUsageDispatcher';
+import MeasureDispatcher from './dispatchers/MeasureDispatcher';
 
 const contextNames = window.STRUM_CONTEXTS || [GLOBAL_KEY];
 
@@ -28,10 +29,12 @@ const ajaxDispatcher = new AjaxDispatcher();
 const elementTimingDispatcher = new ElementTimingDispatcher();
 const webVitalsDispatcher = new WebVitalsDispatcher();
 const memoryUsageDispatcher = new MemoryUsageDispatcher();
+const measureDispatcher = new MeasureDispatcher();
 
 visibilityObserver.addListener(pageLoadDispatcher);
 visibilityObserver.addListener(ajaxDispatcher);
 visibilityObserver.addListener(elementTimingDispatcher);
+visibilityObserver.addListener(measureDispatcher);
 // DON'T: visibilityObserver.addListener(webVitalsDispatcher);
 // we're not adding web vitals dispatcher to the visibility observer because we
 // don't control the implementation of how metric are collected and I believe
@@ -54,6 +57,7 @@ contextNames.forEach((contextName) => {
     elementTimingDispatcher.addExecutor(executor);
     webVitalsDispatcher.addExecutor(executor);
     memoryUsageDispatcher.addExecutor(executor);
+    measureDispatcher.addExecutor(executor);
   });
 });
 
@@ -63,6 +67,7 @@ ajaxDispatcher.start();
 elementTimingDispatcher.start();
 webVitalsDispatcher.start();
 memoryUsageDispatcher.start();
+measureDispatcher.start();
 
 // start observing visibility changes
 visibilityObserver.startListening();

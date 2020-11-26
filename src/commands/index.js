@@ -5,7 +5,7 @@ import AjaxCommand from './AjaxCommand';
 import IdentifyCommand from './IdentifyCommand';
 import RouteChangeCommand from './RouteChangeCommand';
 import VitalMetricCommand from './VitalMetricCommmand';
-import { StartTransactionCommand, EndTransactionCommand } from './transactions';
+import { RecordTransactionCommand, StartTransactionCommand, EndTransactionCommand } from './transactions';
 import type {
   CommandContext,
   Command,
@@ -20,6 +20,7 @@ const commands = {
   ajax: AjaxCommand,
   startTransaction: StartTransactionCommand,
   endTransaction: EndTransactionCommand,
+  recordTransaction: RecordTransactionCommand,
   identify: IdentifyCommand,
   routeChange: RouteChangeCommand,
   longTask: LongTaskCommand,
