@@ -1,6 +1,6 @@
 /* @flow */
 import type { Command, CommandContext } from './types';
-import { getDefaultMeta } from '../common';
+import { logDebug, getDefaultMeta } from '../common';
 
 const transactions = {};
 
@@ -95,7 +95,8 @@ class RecordTransactionCommand implements Command {
     }
 
     if (!duration || Number.isNaN(duration) || !Number.isFinite(duration) || duration <= 0) {
-      throw new Error(`transaction duration "${duration}" is invalid or not provided`);
+      logDebug(`transaction duration "${duration}" is invalid or not provided`);
+      return;
     }
 
     const { timing } = window.performance;
