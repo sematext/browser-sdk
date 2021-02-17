@@ -10,8 +10,8 @@ HEAD=$(git rev-parse HEAD)
 cat > invalidation.json <<- EOM
 {
   "Paths": {
-    "Quantity": 1,
-    "Items": ["/experience.js*"]
+    "Quantity": 2,
+    "Items": ["/experience.js*", "/rum.js*"]
   },
   "CallerReference": "$HEAD"
 }
@@ -22,6 +22,8 @@ EOM
 
 aws s3 cp ./dist/experience.js s3://$BUCKET $AWS_OPT
 aws s3 cp ./dist/experience.js.LICENSE.txt s3://$BUCKET $AWS_OPT
+aws s3 cp ./dist/experience.js s3://$BUCKET/rum.js $AWS_OPT
+aws s3 cp ./dist/experience.js.LICENSE.txt s3://$BUCKET/rum.js.LICENSE.txt $AWS_OPT
 
 aws cloudfront create-invalidation \
     --invalidation-batch file://invalidation.json \
