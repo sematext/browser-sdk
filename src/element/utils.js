@@ -37,7 +37,7 @@ export const getGlobalElementTiming = (contextName: string): Array<PerformanceEn
     const observerElements = window[`${contextName}lt`].observer.takeRecords();
     if (observerElements && observerElements.length > 0) {
       const timingElements = [];
-      observerElements.getEntries().forEach((e) => {
+      observerElements.forEach((e) => {
         switch (e.entryType) {
           case 'element':
             timingElements.push(e);
