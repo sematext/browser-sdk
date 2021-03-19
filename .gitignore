@@ -27,3 +27,5 @@ gradlew.bat
 
 # MacOS files and directories
 .DS_Store
+
+dist/*
