@@ -57,8 +57,6 @@ class RumUploader implements Uploader {
     if (!this.setupDone) {
       if (this.context.config) {
         this.setup(this.context.config);
-      } else {
-        throw new Error('Config must be set before using uploader');
       }
     }
 
