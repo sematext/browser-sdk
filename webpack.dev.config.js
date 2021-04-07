@@ -16,7 +16,6 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
-    new webpack.ExtendedAPIPlugin(),
     new webpack.DefinePlugin({ ...GLOBALS }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
