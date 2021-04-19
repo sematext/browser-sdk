@@ -13,7 +13,6 @@ module.exports = {
     filename: 'experience.js',
   },
   plugins: [
-    new webpack.ExtendedAPIPlugin(),
     new webpack.DefinePlugin({ ...GLOBALS }),
   ],
   optimization: {
