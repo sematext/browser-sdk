@@ -65,7 +65,7 @@ class MemoryUsageDispatcher implements Dispatcher {
   getAndSendMeasurement() {
     try {
       //$FlowFixMe
-      performance.measureMemory().then((measurements) => {
+      performance.measureUserAgentSpecificMemory().then((measurements) => {
         this.executors.forEach(e => e.execute('memoryUsage', measurements));
       });
     } catch (error) {

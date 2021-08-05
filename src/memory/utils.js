@@ -4,4 +4,4 @@
 export const MEASUREMENT_INTERVAL_IN_MS = 60 * 1000;
 
 //$FlowFixMe
-export const memoryUsageSupported = (): boolean => performance.measureMemory;
+export const memoryUsageSupported = (): boolean => performance.measureUserAgentSpecificMemory;

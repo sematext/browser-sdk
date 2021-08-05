@@ -19,6 +19,7 @@ class MemoryUsageCommand implements Command {
     const { breakdown, bytes } = args[0];
     const timestamp = new Date();
     const resolveUrl = config && config.resolveUrl;
+    const sendBreakdowns = config && config.sendBreakdowns;
     const pageLoadUuid = getPageLoadUuid();
     const url = toUrlInfo(window.location, resolveUrl);
     const meta = getDefaultMeta(this.context);
@@ -38,40 +39,42 @@ class MemoryUsageCommand implements Command {
       uploader.enqueue(totalUsageObject, 'memoryUsages');
     }
 
-    breakdown.forEach((measurement) => {
-      const {
-        attribution,
-        // eslint-disable-next-line no-shadow
-        bytes,
-        userAgentSpecificTypes,
-      } = measurement;
+    if (sendBreakdowns) {
+      breakdown.forEach((measurement) => {
+        const {
+          attribution,
+          // eslint-disable-next-line no-shadow
+          bytes,
+          userAgentSpecificTypes,
+        } = measurement;
 
-      // create attribution objects
-      const attributionArray = [];
-      attribution.forEach((attrib) => {
-        if (typeof attrib === 'string') {
-          attributionArray.push({
-            url: attrib,
-          });
-        } else {
-          attributionArray.push(attrib);
+        // create attribution objects
+        const attributionArray = [];
+        attribution.forEach((attrib) => {
+          if (typeof attrib === 'string') {
+            attributionArray.push({
+              url: attrib,
+            });
+          } else {
+            attributionArray.push(attrib);
+          }
+        });
+
+        const usage = {
+          bytes,
+          attribution: attributionArray,
+          userAgentSpecificTypes,
+          pageLoadUuid,
+          '@timestamp': timestamp.toISOString(),
+          url,
+          meta,
+        };
+
+        if (usage && uploader) {
+          uploader.enqueue(usage, 'memoryUsages');
         }
       });
-
-      const usage = {
-        bytes,
-        attribution: attributionArray,
-        userAgentSpecificTypes,
-        pageLoadUuid,
-        '@timestamp': timestamp.toISOString(),
-        url,
-        meta,
-      };
-
-      if (usage && uploader) {
-        uploader.enqueue(usage, 'memoryUsages');
-      }
-    });
+    }
   }
 }
 
