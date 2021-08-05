@@ -22,6 +22,7 @@ class RumUploader implements Uploader {
   delayTimer: ?TimeoutID;
   maxDelay: ?number;
   sendDelay: ?number;
+  sendBreakdowns: boolean;
 
   /**
    * Constructor.
@@ -31,6 +32,7 @@ class RumUploader implements Uploader {
     this.contextName = contextName;
     this.sending = false;
     this.setupDone = false;
+    this.sendBreakdowns = false;
     this.numSending = 0;
     this.queue = [];
     if (context.config) {
@@ -41,6 +43,7 @@ class RumUploader implements Uploader {
   setup(config: Configuration) {
     this.maxDelay = config.maxDelay;
     this.sendDelay = config.sendDelay;
+    this.sendBreakdowns = config.sendBreakdowns;
     this.maxDelayInterval = setInterval(() => {
       this.sendBatch();
     }, this.maxDelay || DEFAULT_MAX_DELAY);

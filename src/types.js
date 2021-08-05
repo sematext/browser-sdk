@@ -7,6 +7,7 @@ export type Configuration = {
   maxDelay: ?number,
   release: ?string,
   ignoreOrigins: ?Array<string>,
+  sendBreakdowns: boolean,
 }
 
 export type MetricType = 'pageLoad' | 'ajax' | 'transaction' | 'routeChange' | 'longTask' |
