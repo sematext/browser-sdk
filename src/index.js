@@ -19,9 +19,13 @@ import MemoryUsageDispatcher from './dispatchers/MemoryUsageDispatcher';
 import MeasureDispatcher from './dispatchers/MeasureDispatcher';
 
 const contextNames = window.STRUM_CONTEXTS || [GLOBAL_KEY];
+let ignoreList = window.STRUM_IGNORE_AJAX;
+if (ignoreList === null) {
+  ignoreList = [];
+}
 
-patchXhr(window);
-patchFetch(window);
+patchXhr(window, ignoreList);
+patchFetch(window, ignoreList);
 
 const visibilityObserver = new DocumentVisibilityObserver();
 const pageLoadDispatcher = new PageLoadDispatcher();

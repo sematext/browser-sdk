@@ -20,3 +20,12 @@ export function checkTaint(url: string, taint: string): boolean {
 
   return false;
 }
+
+export function isUrlIgnored(url: string, ignoreList: string[]): boolean {
+  for (let i = 0; i < ignoreList.length; i += 1) {
+    if (url.toLowerCase().startsWith(ignoreList[i].toLowerCase())) {
+      return true;
+    }
+  }
+  return false;
+}

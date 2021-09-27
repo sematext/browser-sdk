@@ -1,8 +1,8 @@
 /* @flow */
 import { createListeners } from './listeners';
-import { taintUrl } from './common';
+import { taintUrl, isUrlIgnored } from './common';
 
-export default function patchFetch(scopeObject: any) {
+export default function patchFetch(scopeObject: any, ignoreList: string[]) {
   const { fetch } = scopeObject;
 
   scopeObject.fetch = (urlOrRequest, ...args) => {
@@ -22,6 +22,12 @@ export default function patchFetch(scopeObject: any) {
       body,
     } = request;
 
+    const ignored = isUrlIgnored(request.url, ignoreList);
+    if (ignored) {
+      // if the request is ignored try sending the original one if possible
+      return (urlOrRequest && urlOrRequest.url) ?
+        fetch(urlOrRequest, ...args) : fetch(request, ...args);
+    }
 
     const listeners = createListeners(request.url);
     listeners.forEach(l => l.onSend && l.onSend(l));

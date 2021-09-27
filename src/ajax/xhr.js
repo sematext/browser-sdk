@@ -1,12 +1,18 @@
 /* @flow */
 import { createListeners } from './listeners';
-import { taintUrl } from './common';
+import { taintUrl, isUrlIgnored } from './common';
 
-export default function patchXhr(scopeObject: any) {
+export default function patchXhr(scopeObject: any, ignoreList: string[]) {
   const { XMLHttpRequest } = scopeObject;
 
   const pOpen = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function open(method, originalUrl, ...args) {
+    const ignored = isUrlIgnored(originalUrl, ignoreList);
+
+    if (ignored) {
+      return pOpen.apply(this, [method, originalUrl, ...args]);
+    }
+
     const { url, taint } = taintUrl(originalUrl);
     this.__listeners = createListeners(originalUrl);
     this.addEventListener('loadend', (event) => {
