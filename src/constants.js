@@ -18,6 +18,3 @@ export const PAGELOAD_HARD_TIMEOUT = 5000;
 export const PAGELOAD_SOFT_TIMEOUT = 5000;
 
 export const BOT_USER_AGENT = RegExp('alexa|bot|crawl(er|ing)|facebookexternalhit|feedburner|google web preview|nagios|postrank|pingdom|slurp|spider|yahoo!|yandex');
-
-// the list hosts to ignore
-export const IGNORE_AJAX_KEY = 'strumignore';

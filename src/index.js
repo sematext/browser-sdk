@@ -8,7 +8,7 @@ import PageLoadDispatcher from './dispatchers/PageLoadDispatcher';
 import RumUploader from './RumUploader';
 import bootstrap from './bootstrap';
 import AjaxDispatcher from './dispatchers/AjaxDispatcher';
-import { GLOBAL_KEY, IGNORE_AJAX_KEY } from './constants';
+import { GLOBAL_KEY } from './constants';
 import { setupContext, keepSessionAlive } from './common';
 import patchXhr from './ajax/xhr';
 import patchFetch from './ajax/fetch';
@@ -19,7 +19,7 @@ import MemoryUsageDispatcher from './dispatchers/MemoryUsageDispatcher';
 import MeasureDispatcher from './dispatchers/MeasureDispatcher';
 
 const contextNames = window.STRUM_CONTEXTS || [GLOBAL_KEY];
-let ignoreList = [IGNORE_AJAX_KEY];
+let ignoreList = window.STRUM_IGNORE_AJAX;
 if (ignoreList === null) {
   ignoreList = [];
 }
