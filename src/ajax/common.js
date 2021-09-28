@@ -22,6 +22,9 @@ export function checkTaint(url: string, taint: string): boolean {
 }
 
 export function isUrlIgnored(url: string, ignoreList: string[]): boolean {
+  if (ignoreList === null || ignoreList === undefined) {
+    return false;
+  }
   for (let i = 0; i < ignoreList.length; i += 1) {
     if (url.toLowerCase().startsWith(ignoreList[i].toLowerCase())) {
       return true;

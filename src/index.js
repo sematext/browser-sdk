@@ -20,7 +20,7 @@ import MeasureDispatcher from './dispatchers/MeasureDispatcher';
 
 const contextNames = window.STRUM_CONTEXTS || [GLOBAL_KEY];
 let ignoreList = window.STRUM_IGNORE_AJAX;
-if (ignoreList === null) {
+if (ignoreList === null || ignoreList === undefined) {
   ignoreList = [];
 }
 
