@@ -12,7 +12,7 @@ Repository containing the Browser SDK for the [Sematext Experience](https://sema
  - [Web Vitals metrics](https://sematext.com/docs/experience/webvitals/),
  - [Element timing metrics](https://sematext.com/docs/experience/element-timing/),
  - [User metrics](https://sematext.com/docs/experience/user-identification/),
- - [On-page transaction metrics](https://sematext.com/docs/experience/on-page-transaction/).
+ - [On-page transaction metrics](https://sematext.com/docs/experience/measurements/).
 
 ![Sematext Cloud Experience](docs/images/sematext_cloud_experience_overview.png) 
 
