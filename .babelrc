@@ -1,7 +1,0 @@
-{
-  "plugins": ["transform-object-rest-spread", "babel-plugin-transform-class-properties"],
-  "presets": [
-    "env",
-    "flow"
-  ],
-}
