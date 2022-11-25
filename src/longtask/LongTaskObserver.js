@@ -71,7 +71,7 @@ class LongTaskObserver {
   handleObserve = (observer: Object) => (list: PerformanceObserverEntryList) => {
     list.getEntries().forEach(entry => this.longTasks.push(entry));
     observer(list);
-  }
+  };
 }
 
 export default LongTaskObserver;

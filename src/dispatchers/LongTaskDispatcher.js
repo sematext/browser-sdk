@@ -55,7 +55,7 @@ class LongTaskDispatcher implements Dispatcher {
       const entries = list.getEntries();
       this.executors.forEach(e => e.execute('longTask', entries));
     }
-  }
+  };
 }
 
 export default LongTaskDispatcher;

@@ -170,7 +170,7 @@ class RouteChangeObserver {
     } else {
       this.cancel();
     }
-  }
+  };
 
   /**
    * When mutation occurs in DOM we want to wait for any interesting resources to be loaded.
@@ -199,7 +199,7 @@ class RouteChangeObserver {
         }
       }
     });
-  }
+  };
 
   /**
    * Some nodes such as img, iframe, and link can cause additional resources to

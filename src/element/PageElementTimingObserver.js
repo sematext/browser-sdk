@@ -67,7 +67,7 @@ class PageLoadElementTimingObserver implements ElementTimingObserver {
 
   handleObserve = (list: PerformanceObserverEntryList) => {
     list.getEntries().forEach(entry => this.timingElements.push(entry));
-  }
+  };
 }
 
 export default PageLoadElementTimingObserver;

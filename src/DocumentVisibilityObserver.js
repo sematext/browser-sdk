@@ -20,7 +20,7 @@ class DocumentVisibilityObserver implements VisibilityObserver {
       return document.visibilityState === 'visible';
     }
     return true;
-  }
+  };
 
   addListener(listener: VisibilityListener) {
     this.listeners.push(listener);
@@ -50,7 +50,7 @@ class DocumentVisibilityObserver implements VisibilityObserver {
         this.start();
       }
     }
-  }
+  };
 }
 
 export default DocumentVisibilityObserver;

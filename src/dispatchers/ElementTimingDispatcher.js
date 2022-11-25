@@ -63,7 +63,7 @@ class ElementTimingDispatcher implements Dispatcher {
         }
       });
     }
-  }
+  };
 }
 
 export default ElementTimingDispatcher;

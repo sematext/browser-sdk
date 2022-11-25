@@ -60,7 +60,7 @@ class PageLoadDispatcher implements Dispatcher {
         }, PAGELOAD_SOFT_TIMEOUT);
       },
     );
-  }
+  };
 
   start() {
     if (!this.started) {
@@ -131,7 +131,7 @@ class PageLoadDispatcher implements Dispatcher {
         disconnectGlobalObserver(e.contextName);
       });
     }, PAGELOAD_HARD_TIMEOUT);
-  }
+  };
 }
 
 export default PageLoadDispatcher;

@@ -65,7 +65,7 @@ class MeasureDispatcher implements Dispatcher {
         this.executors.forEach(e => e.execute('recordTransaction', name, startTime, duration));
       });
     }
-  }
+  };
 }
 
 export default MeasureDispatcher;
