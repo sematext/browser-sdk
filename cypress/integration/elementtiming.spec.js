@@ -141,29 +141,23 @@ describe('RUM Script Element Timing Tests', () => {
     // now click the button with route change and long job
     cy.contains('AddTextElement').click();
 
-    // first the ajax call should be present in the data
-    cy.wait('@sendData').then((xhr) => {
-      assert.isNotNull(xhr.request.body);
-      assert.isNotNull(xhr.request.body.body.ajax);
-    });
-
     // next a page load should happen with the element timing data
     cy.wait('@sendData').then((xhr) => {
       assert.isNotNull(xhr.request.body);
+      assert.isNotNull(xhr.request.body.body.ajax);
       assert.isNotNull(xhr.request.body.body.pageLoad);
 
       // check if there are page loads present
       const pageLoads = xhr.request.body.body.pageLoad;
       assert.isAbove(pageLoads.length, 0);
 
-      // check if there are any elements present
-      const pageLoad = pageLoads[0];
-      assert.isNotNull(pageLoad.elementTiming);
-      assert.isAbove(pageLoad.elementTiming.length, 0);
+      // check if there are element timings
+      const elementTimings = xhr.request.body.body.elementTiming;
+      assert.isAbove(elementTimings.length, 0);
 
       // check timing element data - the identifier should be set
       // to the one of the paragraph element
-      const timingElem = pageLoad.elementTiming[0];
+      const timingElem = elementTimings[0];
       assert.isNotNull(timingElem.identifier);
       assert.isTrue(timingElem.identifier === 'soft_page_load_element_timing');
       assert.isAbove(timingElem.startTime, 0);
