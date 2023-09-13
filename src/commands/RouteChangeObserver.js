@@ -74,6 +74,7 @@ class RouteChangeObserver {
     this.startedOffset = this.startedAt - navigationStart;
     this.context = context;
 
+    this.searchForInterestingNodesOnLoad();
     this.setupDomObserver();
     this.setupAjaxObserver();
     this.setupIdlingObserver();
@@ -200,6 +201,13 @@ class RouteChangeObserver {
       }
     });
   };
+
+  searchForInterestingNodesOnLoad() {
+    const nodes = document.querySelectorAll('img, iframe, link');
+    nodes.forEach((node) => {
+      this.waitForNode(node);
+    });
+  }
 
   /**
    * Some nodes such as img, iframe, and link can cause additional resources to
