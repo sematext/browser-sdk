@@ -74,6 +74,7 @@ class RouteChangeObserver {
     this.startedOffset = this.startedAt - navigationStart;
     this.context = context;
 
+    this.searchForInterestingNodesOnLoad();
     this.setupDomObserver();
     this.setupAjaxObserver();
     this.setupIdlingObserver();
@@ -180,7 +181,7 @@ class RouteChangeObserver {
   mutation = (mutations: Array<MutationRecord>) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'attributes') {
-        this.waitForNode(mutation.target);
+        this.interesting = this.waitForNode(mutation.target) || this.interesting;
       } else if (mutation.type === 'childList') {
         let len = mutation.addedNodes.length;
         let i = 0;
@@ -200,6 +201,13 @@ class RouteChangeObserver {
       }
     });
   };
+
+  searchForInterestingNodesOnLoad() {
+    const nodes = document.querySelectorAll('img, iframe, link');
+    nodes.forEach((node) => {
+      this.interesting = this.waitForNode(node) || this.interesting;
+    });
+  }
 
   /**
    * Some nodes such as img, iframe, and link can cause additional resources to
