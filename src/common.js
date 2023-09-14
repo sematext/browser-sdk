@@ -253,7 +253,7 @@ export const getCompressedResources = (
   // filter out resource types that we don't want to collect
   resources.entries = resources.entries.filter(e =>
     !e.name.startsWith('data:') && disabledResourceTypes.indexOf(e.initiatorType) === -1
-    && !e.name.includes('rum-receiver'));
+    && !e.name.includes('rum-receiver.sematext.com'));
 
   // attach resource type
   resources.entries = resources.entries.map(r => ({
