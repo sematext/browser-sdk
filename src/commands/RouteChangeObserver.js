@@ -203,7 +203,8 @@ class RouteChangeObserver {
   };
 
   searchForInterestingNodesOnLoad() {
-    const nodes = document.querySelectorAll('img, iframe, link');
+    // Ignore link on initial load because stylesheets are hard to track
+    const nodes = document.querySelectorAll('img, iframe');
     nodes.forEach((node) => {
       this.interesting = this.waitForNode(node) || this.interesting;
     });
