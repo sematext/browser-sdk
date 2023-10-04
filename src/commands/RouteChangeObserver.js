@@ -64,7 +64,7 @@ class RouteChangeObserver {
     url: string,
     navigationStart: number,
     callback: (metrics: any, longTasks: Array<LongTask>,
-               elementTimings: Array<ElementTiming>) => void,
+      elementTimings: Array<ElementTiming>) => void,
   ) {
     logDebug('Route change observed');
     this.cb = callback;
@@ -224,7 +224,7 @@ class RouteChangeObserver {
     let interesting = false;
     const isResourceNode = node && node.nodeName &&
       (node.nodeName.match(/^(IMG|IFRAME|IMAGE)/i) ||
-      (node.nodeName.toUpperCase() === 'LINK' && (node.getAttribute('rel') || '').trim().toUpperCase() === 'STYLESHEET'));
+        (node.nodeName.toUpperCase() === 'LINK' && (node.getAttribute('rel') || '').trim().toUpperCase() === 'STYLESHEET'));
 
     if (isResourceNode) {
       const url = node.getAttribute('src') || node.getAttribute('xlink:href') || node.getAttribute('href');
@@ -253,6 +253,14 @@ class RouteChangeObserver {
       }
 
       if (node.style && node.style.visibility === 'hidden') {
+        return false;
+      }
+
+      // If stylesheet but already loaded
+      if (node.nodeName.toUpperCase() === 'LINK'
+        && node.getAttribute('rel').toUpperCase() === 'STYLESHEET'
+        && Boolean(node.sheet)
+      ) {
         return false;
       }
 
