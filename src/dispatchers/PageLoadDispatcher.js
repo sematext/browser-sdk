@@ -31,7 +31,7 @@ class PageLoadDispatcher implements Dispatcher {
   }
 
   isRefreshed() {
-    if (window.performance) {
+    if (window.performance && window.performance.navigation) {
       return window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD;
     }
     return false;
