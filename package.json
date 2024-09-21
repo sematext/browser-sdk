@@ -34,7 +34,7 @@
     "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.27.5",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "flow-bin": "^0.115.0",
     "html-webpack-plugin": "^5.1.0",
     "start-server-and-test": "^2.0.3",
